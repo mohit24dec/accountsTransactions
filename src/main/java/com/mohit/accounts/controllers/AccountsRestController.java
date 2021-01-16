@@ -29,7 +29,7 @@ public class AccountsRestController {
 			
 	}
 	
-	@RequestMapping(value="/accounts/{accountNumber}")
+	@RequestMapping(value="/accounts/{accountNumber}", method = RequestMethod.GET)
 	public List<AccountTransactions> findReservation(@PathVariable("accountNumber") int accountNumber) {
 		return accountTransactionsRepository.findTransactions(accountNumber);
 	}
