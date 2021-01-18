@@ -23,14 +23,14 @@ public class AccountsRestController {
 	AccountTransactionsRepository accountTransactionsRepository;
 	
 	@RequestMapping(value="/accounts",method = RequestMethod.GET)
-	public List<Accounts> findFlights(){
+	public List<Accounts> findAccounts(){
 		
 		return accountsRepository.findAll();
 			
 	}
 	
 	@RequestMapping(value="/accounts/{accountNumber}", method = RequestMethod.GET)
-	public List<AccountTransactions> findReservation(@PathVariable("accountNumber") int accountNumber) {
+	public List<AccountTransactions> findTransactions(@PathVariable("accountNumber") int accountNumber) {
 		return accountTransactionsRepository.findTransactions(accountNumber);
 	}
 }
