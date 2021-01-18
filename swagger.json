@@ -1,0 +1,111 @@
+swagger: "2.0"
+info:
+  description: "swagger to accounts and its transactions"
+  version: "1.0.0"
+  title: "Swagger Accounts"
+host: "localhost"
+basePath: "/"
+tags:
+- name: "accounts"
+  description: "Get accounts and its transactions"
+schemes:
+- "https"
+- "http"
+paths:
+  /accounts/{accountNumber}:
+    get:
+      tags:
+      - "accounts"
+      summary: "Find account transactions by account number"
+      description: "Returns account transactions"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "accountNumber"
+        in: "path"
+        description: "account Number"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Transactions"
+        "400":
+          description: "Invalid account number"
+        "404":
+          description: "Account Transactions not found"
+      security:
+      - api_key: []
+  /accounts:
+    get:
+      tags:
+      - "accounts"
+      summary: "Get accounts"
+      description: "Returns all accounts"
+      operationId: "getAccounts"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Accounts"
+        "404":
+          description: "Accounts not found"
+      security:
+      - api_key: []
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+definitions:
+  Transactions:
+    type: "array"
+    items:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+        accountNumber:
+          type: "integer"
+        accountName:
+          type: "string"
+        valueDate:
+          type: "string"
+          format: "date"
+        currency:
+          type: "string"
+        debitAmount:
+          type: "number"
+          format: "double"
+        creditAmount:
+          type: "number"
+          format: "double"
+        transactionType:
+          type: "string"
+    xml:
+      name: "Pet"
+  Accounts:
+    type: "array"
+    items:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+        accountNumber:
+          type: "integer"
+        accountName:
+          type: "string"
+        balanceDate:
+          type: "string"
+          format: "date"
+        currency:
+          type: "string"
+        balanceAmount:
+          type: "number"
+          format: "double"
+        accountType:
+          type: "string"
